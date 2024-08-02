@@ -1,0 +1,89 @@
+= SQL String Builder DSL
+:Author: Psycotrompus
+:Email: <ejlayco@gmail.com>
+:Date: date
+
+== What is this?
+
+This is a simple DSL for building SQL queries in Java.
+
+== Why?
+
+I needed a simple way to build SQL queries in Java, and I didn't want to use additional libraries.
+
+== Features
+
+* Column projections with aliases
+* Table aliases
+** Inter-schema joins support
+* Table joins
+** Inner joins
+** Left joins
+* Filters
+** Produces named parameters for later preparation of statement
+* Ordering (one or more columns)
+
+== How do I use it?
+
+Make sure you have Java 22 SDK already setup/installed. Add the dependency to your project:
+
+[source,xml]
+----
+<dependency>
+  <groupId>com.lits.sql</groupId>
+  <artifactId>sql-stringbuilder-dsl</artifactId>
+  <version>{version}</version>
+</dependency>
+----
+
+Create a `SqlTable` objects for each table in your query:
+
+[source,java]
+----
+SqlTable tenant = SqlTable.of("tenant").on("schema1").as("t").build();
+SqlTable profile = SqlTable.of("profile").on("schema2").as("p").build();
+SqlTable user = SqlTable.of("user").on("schema3").as("u").build();
+----
+
+Then, create a `SqlBuilder` object and use it to build your query:
+
+[source,java]
+----
+final String sql = SqlBuilder.select(tenant.asterisk())
+    .from(tenant)
+    .leftJoin(profile).on(tenant.column("id").eq(profile.column("tenant_id")))
+    .innerJoin(user).on(profile.column("id").eq(user.column("profile_id")))
+    .where(
+        tenant.column("id").in("id")
+            .or(tenant.column("name").eq("name"))
+    )
+    .and(tenant.column("active").isFalse().or(tenant.column("active").isNull()))
+    .and(profile.column("name").like("prefix"))
+    .orderBy(profile.column("name").asc(), tenant.column("date_registered").desc())
+    .toSql();
+----
+
+The output of the above code will be:
+
+[source,sql]
+----
+SELECT t.*
+FROM schema1.tenant t
+  LEFT JOIN schema2.profile p ON t.id = p.tenant_id
+  INNER JOIN schema3.user u ON p.id = u.profile_id
+WHERE 1=1
+  AND (t.id IN (:id) OR t.name = :name)
+  AND (t.active IS FALSE OR t.active IS NULL)
+  AND p.name LIKE :prefix
+ORDER BY p.name ASC, t.date_registered DESC;
+----
+
+.PREPARE YOUR STATEMENT
+[NOTE]
+=======================
+After generating the SQL string, make sure to sanitize it before executing it.
+=======================
+
+== License
+
+This project is licensed under the MIT License - see the LICENSE.txt file for details.
