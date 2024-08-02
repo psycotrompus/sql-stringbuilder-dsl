@@ -25,7 +25,11 @@ I needed a simple way to build SQL queries in Java, and I didn't want to use add
 
 == How do I use it?
 
-Make sure you have Java 22 SDK already setup/installed. Add the dependency to your project:
+Make sure you have Java 22 SDK already setup/installed.
+
+Checkout this project source then do maven install of this project.
+
+Add the dependency to your project:
 
 [source,xml]
 ----
@@ -35,6 +39,12 @@ Make sure you have Java 22 SDK already setup/installed. Add the dependency to yo
   <version>{version}</version>
 </dependency>
 ----
+
+.Not Available on Maven Central
+[NOTE]
+=======================
+This project is not available on Maven Central yet. You can check out the source code and do maven install of this project.
+=======================
 
 Create a `SqlTable` objects for each table in your query:
 

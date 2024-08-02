@@ -7,6 +7,17 @@
   <groupId>com.lits.sql</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>SQL String Builder DSL</name>
+  <description>SQL String Builder DSL</description>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+  </licenses>
 
   <properties>
     <maven.compiler.source>22</maven.compiler.source>
