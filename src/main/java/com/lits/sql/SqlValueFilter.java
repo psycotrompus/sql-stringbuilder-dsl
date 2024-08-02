@@ -2,7 +2,6 @@ package com.lits.sql;
 
 /**
  * References a parameterized value filter in a SQL statement.
- *
  * The format is:
  * <pre>
  *   table_alias.column_name [comparator] parameter

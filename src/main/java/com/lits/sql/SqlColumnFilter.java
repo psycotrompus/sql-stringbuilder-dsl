@@ -2,7 +2,6 @@ package com.lits.sql;
 
 /**
  * Represents a column filter.
- *
  * Generated SQL:
  * <pre>
  *   table1.column1 = table2.column2
