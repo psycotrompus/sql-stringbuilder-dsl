@@ -22,6 +22,10 @@ public class SqlTable implements PartialSql {
 		return new Builder(table);
 	}
 
+	/**
+	 * Builder class for {@link SqlTable}.
+	 * Use the {@link SqlTable#of(String)} method to create an instance of this class.
+	 */
 	public static class Builder {
 
 		private String schema;
