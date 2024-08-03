@@ -5,6 +5,9 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+/**
+ * The base class for different types of filters in the <code>WHERE</code> clause.
+ */
 public interface SqlTypeFilter extends PartialSql {
 
 	default SqlGroupedFilter and(SqlTypeFilter filter) {

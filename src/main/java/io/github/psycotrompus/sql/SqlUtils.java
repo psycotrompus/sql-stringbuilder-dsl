@@ -1,6 +1,9 @@
 package io.github.psycotrompus.sql;
 
-public final class SqlUtils {
+/**
+ * Utility class for SQL related operations.
+ */
+final class SqlUtils {
 
 	public static boolean isBlank(String str) {
 		return str == null || str.trim().isEmpty();

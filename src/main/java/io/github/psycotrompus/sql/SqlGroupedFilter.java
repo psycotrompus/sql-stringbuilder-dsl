@@ -4,6 +4,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
+/**
+ * Represents a combination of filters in the <code>WHERE</code> clause.
+ */
 public class SqlGroupedFilter implements SqlTypeFilter {
 
 	private final String operator;

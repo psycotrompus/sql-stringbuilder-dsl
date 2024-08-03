@@ -2,6 +2,9 @@ package io.github.psycotrompus.sql;
 
 import static io.github.psycotrompus.sql.SqlUtils.isBlank;
 
+/**
+ * Represents a column definition when generating SQL queries.
+ */
 public class SqlColumn implements PartialSql {
 
 	private final SqlTable table;

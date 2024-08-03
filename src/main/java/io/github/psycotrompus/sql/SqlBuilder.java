@@ -7,8 +7,17 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
+/**
+ * Main class for building SQL queries. The pattern implementation is based on the Step Builder pattern.
+ */
 public class SqlBuilder implements PartialSql {
 
+	/**
+	 * Creates a new {@link SqlBuilder} instance for building a SELECT query.
+	 *
+	 * @param columns the columns to select
+	 * @return a new {@link SqlBuilder} instance
+	 */
 	public static SqlBuilder select(SqlColumn... columns) {
 		return select(new SqlProjection(asList(columns)));
 	}

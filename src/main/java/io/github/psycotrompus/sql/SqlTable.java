@@ -5,6 +5,9 @@ import javax.annotation.Nullable;
 import static io.github.psycotrompus.sql.SqlUtils.isBlank;
 import static java.util.Arrays.asList;
 
+/**
+ * Represents a table definition when generating SQL queries.
+ */
 public class SqlTable implements PartialSql {
 
 	public static Builder of(String table) {

@@ -1,5 +1,8 @@
 package io.github.psycotrompus.sql;
 
+/**
+ * Represents a column as part of the <code>ORDER BY</code> clause.
+ */
 public class SqlOrder implements PartialSql {
 
 	private final SqlColumn column;

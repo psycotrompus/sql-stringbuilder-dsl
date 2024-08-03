@@ -4,6 +4,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
+/**
+ * Represents the columns as part of the <code>SELECT</code> clause.
+ */
 public class SqlProjection implements PartialSql {
 
 	private final List<SqlColumn> columns;

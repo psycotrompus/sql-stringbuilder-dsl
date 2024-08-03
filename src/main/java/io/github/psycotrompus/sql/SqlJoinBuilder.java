@@ -2,6 +2,9 @@ package io.github.psycotrompus.sql;
 
 import static io.github.psycotrompus.sql.SqlUtils.isBlank;
 
+/**
+ * Represents a JOIN clause when generating SQL query.
+ */
 public class SqlJoinBuilder implements PartialSql {
 
 	private final SqlFromBuilder fromBuilder;
