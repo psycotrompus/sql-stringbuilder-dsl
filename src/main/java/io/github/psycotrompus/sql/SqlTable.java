@@ -13,9 +13,9 @@ import static java.util.Arrays.asList;
 public class SqlTable implements PartialSql {
 
 	/**
-	 * <p>of.</p>
+	 * <p>Creates a builder instance of {@link SqlTable}.</p>
 	 *
-	 * @param table a {@link java.lang.String} object
+	 * @param table a {@link java.lang.String} The required table name.
 	 * @return a {@link io.github.psycotrompus.sql.SqlTable.Builder} object
 	 */
 	public static Builder of(String table) {
@@ -34,16 +34,30 @@ public class SqlTable implements PartialSql {
 			this.table = table;
 		}
 
+		/**
+		 * Sets the schema name for the table.
+		 * @param schema The schema name.
+		 * @return this builder instance.
+		 */
 		public Builder on(String schema) {
 			this.schema = schema;
 			return this;
 		}
 
+		/**
+		 * Sets the alias for the table. Useful for <code>JOIN</code>s.
+		 * @param alias The alias name of this table.
+		 * @return this builder instance.
+		 */
 		public Builder as(String alias) {
 			this.alias = alias;
 			return this;
 		}
 
+		/**
+		 * Builds a {@link SqlTable} instance.
+		 * @return a {@link SqlTable} instance.
+		 */
 		public SqlTable build() {
 			return new SqlTable(schema, table, alias);
 		}

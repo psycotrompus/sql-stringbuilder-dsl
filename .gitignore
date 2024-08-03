@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 settings.xml
+releases.properties
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

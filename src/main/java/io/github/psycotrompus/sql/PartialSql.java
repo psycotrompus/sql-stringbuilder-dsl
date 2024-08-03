@@ -6,9 +6,9 @@ package io.github.psycotrompus.sql;
  * @author ejlay
  */
 public interface PartialSql {
+
 	/**
-	 * <p>toSql.</p>
-	 *
+	 * The main method to generate part of a SQL statement.
 	 * @return a {@link java.lang.String} object
 	 */
 	String toSql();
