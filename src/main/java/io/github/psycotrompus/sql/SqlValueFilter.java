@@ -15,6 +15,8 @@ package io.github.psycotrompus.sql;
  * <pre>
  *   table.column_name IS true
  * </pre>
+ *
+ * @author ejlay
  */
 public class SqlValueFilter implements SqlTypeFilter {
 
@@ -30,6 +32,7 @@ public class SqlValueFilter implements SqlTypeFilter {
 		this.parameter = parameter;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toSql() {
 		return String.format("%s %s %s", column.toSql(), comparator, parameter);

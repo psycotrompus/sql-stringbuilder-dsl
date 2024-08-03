@@ -6,6 +6,8 @@ import static java.util.stream.Collectors.joining;
 
 /**
  * Represents a combination of filters in the <code>WHERE</code> clause.
+ *
+ * @author ejlay
  */
 public class SqlGroupedFilter implements SqlTypeFilter {
 
@@ -18,10 +20,16 @@ public class SqlGroupedFilter implements SqlTypeFilter {
 		this.filters = filters;
 	}
 
+	/**
+	 * <p>Getter for the field <code>filters</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object
+	 */
 	public List<SqlTypeFilter> getFilters() {
 		return filters;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toSql() {
 		return "(" + filters.stream().map(SqlTypeFilter::toSql)
