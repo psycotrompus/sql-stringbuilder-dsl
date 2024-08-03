@@ -11,7 +11,9 @@
   <description>SQL String Builder DSL</description>
 
   <scm>
+    <connection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</connection>
     <developerConnection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</developerConnection>
+    <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -21,6 +23,15 @@
       <url>https://opensource.org/licenses/MIT</url>
     </license>
   </licenses>
+
+  <developers>
+    <developer>
+      <name>Psycotrompus</name>
+      <email>ejlayco@gmail.com</email>
+      <organization>Layco IT Solutions</organization>
+      <organizationUrl>https://github.com/psycotrompus</organizationUrl>
+    </developer>
+  </developers>
 
   <properties>
     <maven.compiler.source>22</maven.compiler.source>
