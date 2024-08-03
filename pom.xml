@@ -4,7 +4,7 @@
 
   <groupId>com.lits.sql</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>SQL String Builder DSL</name>
@@ -12,7 +12,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</developerConnection>
-    <tag>0.01</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <licenses>
