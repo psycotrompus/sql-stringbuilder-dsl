@@ -1,4 +1,4 @@
-package com.lits.sql;
+package io.github.psycotrompus.sql;
 
 public class SqlOrder implements PartialSql {
 

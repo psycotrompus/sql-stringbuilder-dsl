@@ -1,4 +1,4 @@
-package com.lits.sql;
+package io.github.psycotrompus.sql;
 
 import java.util.ArrayList;
 import java.util.List;

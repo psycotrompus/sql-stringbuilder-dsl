@@ -1,8 +1,8 @@
-package com.lits.sql;
+package io.github.psycotrompus.sql;
 
 import javax.annotation.Nullable;
 
-import static com.lits.sql.SqlUtils.isBlank;
+import static io.github.psycotrompus.sql.SqlUtils.isBlank;
 import static java.util.Arrays.asList;
 
 public class SqlTable implements PartialSql {

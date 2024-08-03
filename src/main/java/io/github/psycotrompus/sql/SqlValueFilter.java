@@ -1,4 +1,4 @@
-package com.lits.sql;
+package io.github.psycotrompus.sql;
 
 /**
  * References a parameterized value filter in a SQL statement.

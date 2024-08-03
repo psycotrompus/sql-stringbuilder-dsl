@@ -1,6 +1,6 @@
-package com.lits.sql;
+package io.github.psycotrompus.sql;
 
-import static com.lits.sql.SqlUtils.isBlank;
+import static io.github.psycotrompus.sql.SqlUtils.isBlank;
 
 public class SqlJoinBuilder implements PartialSql {
 
