@@ -12,6 +12,10 @@
   <name>SQL String Builder DSL</name>
   <description>SQL String Builder DSL</description>
 
+  <scm>
+    <developerConnection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</developerConnection>
+  </scm>
+
   <licenses>
     <license>
       <name>MIT License</name>
@@ -32,5 +36,15 @@
       <version>4.8.6</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>3.1.1</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
