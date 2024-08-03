@@ -4,7 +4,7 @@
 
   <groupId>io.github.psycotrompus</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
-  <version>0.0.5-SNAPSHOT</version>
+  <version>0.0.5</version>
   <packaging>jar</packaging>
   <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
 
@@ -15,7 +15,7 @@
     <connection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</connection>
     <developerConnection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</developerConnection>
     <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
-    <tag>HEAD</tag>
+    <tag>0.0.5</tag>
   </scm>
 
   <licenses>
