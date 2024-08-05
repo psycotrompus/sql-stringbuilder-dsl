@@ -16,9 +16,9 @@ package io.github.psycotrompus.sql;
  *   table.column_name IS true
  * </pre>
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlValueFilter implements SqlTypeFilter {
+public class SqlValueFilter extends SqlTypeFilter {
 
 	private final SqlColumn column;
 
@@ -34,7 +34,7 @@ public class SqlValueFilter implements SqlTypeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public String toSql() {
+	String toSql() {
 		return String.format("%s %s %s", column.toSql(), comparator, parameter);
 	}
 }

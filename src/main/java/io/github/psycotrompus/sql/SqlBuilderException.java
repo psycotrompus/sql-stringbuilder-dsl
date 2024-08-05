@@ -3,7 +3,7 @@ package io.github.psycotrompus.sql;
 /**
  * Exception thrown when an error occurs during SQL validation and building.
  *
- * @author ejlay
+ * @author ejlayco
  */
 public class SqlBuilderException extends RuntimeException {
 

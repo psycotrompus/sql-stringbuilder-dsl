@@ -5,11 +5,11 @@ import java.util.List;
 import static java.util.stream.Collectors.joining;
 
 /**
- * Represents a combination of filters in the <code>WHERE</code> clause.
+ * Represents a combination of filters in the <code>JOIN</code> and <code>WHERE</code> clause.
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlGroupedFilter implements SqlTypeFilter {
+public class SqlGroupedFilter extends SqlTypeFilter {
 
 	private final String operator;
 
@@ -25,13 +25,13 @@ public class SqlGroupedFilter implements SqlTypeFilter {
 	 *
 	 * @return a {@link java.util.List} object
 	 */
-	public List<SqlTypeFilter> getFilters() {
+	List<SqlTypeFilter> getFilters() {
 		return filters;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String toSql() {
+	String toSql() {
 		return "(" + filters.stream().map(SqlTypeFilter::toSql)
 				.collect(joining(" " + operator + " ")) + ")";
 	}

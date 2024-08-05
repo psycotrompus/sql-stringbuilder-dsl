@@ -59,18 +59,18 @@ Then, create a `SqlBuilder` object and use it to build your query:
 
 [source,java]
 ----
-final String sql = SqlBuilder.select(tenant.asterisk())
+final var sql = SqlBuilder
+    .select(tenant.asterisk())
     .from(tenant)
     .leftJoin(profile).on(tenant.column("id").eq(profile.column("tenant_id")))
     .innerJoin(user).on(profile.column("id").eq(user.column("profile_id")))
     .where(
-        tenant.column("id").in("id")
-            .or(tenant.column("name").eq("name"))
+        tenant.column("id").in("id").or(tenant.column("name").eq("name"))
     )
     .and(tenant.column("active").isFalse().or(tenant.column("active").isNull()))
     .and(profile.column("name").like("prefix"))
     .orderBy(profile.column("name").asc(), tenant.column("date_registered").desc())
-    .toSql();
+    .build();
 ----
 
 The output of the above code will be:
@@ -78,12 +78,12 @@ The output of the above code will be:
 [source,sql]
 ----
 SELECT t.*
-FROM schema1.tenant t
-  LEFT JOIN schema2.profile p ON t.id = p.tenant_id
-  INNER JOIN schema3.user u ON p.id = u.profile_id
+FROM schema1.tenant AS t
+  LEFT JOIN schema2.profile AS p ON t.id = p.tenant_id
+  INNER JOIN schema3.user AS u ON p.id = u.profile_id
 WHERE 1=1
-  AND (t.id IN (:id) OR t.name = :name)
-  AND (t.active IS FALSE OR t.active IS NULL)
+  AND (t.id IN :id OR t.name = :name)
+  AND (t.active IS false OR t.active IS null)
   AND p.name LIKE :prefix
 ORDER BY p.name ASC, t.date_registered DESC;
 ----

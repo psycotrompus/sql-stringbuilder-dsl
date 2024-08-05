@@ -5,9 +5,9 @@ import static io.github.psycotrompus.sql.SqlUtils.isBlank;
 /**
  * Represents a column definition when generating SQL queries.
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlColumn implements PartialSql {
+public class SqlColumn extends PartialSql {
 
 	private final SqlTable table;
 
@@ -125,7 +125,7 @@ public class SqlColumn implements PartialSql {
 
 	/** {@inheritDoc} */
 	@Override
-	public String toSql() {
+	String toSql() {
 		if (!isBlank(table.getAlias()) && !isBlank(alias)) {
 			return String.format("%s.%s AS %s", table.getAlias(), name, alias);
 		}

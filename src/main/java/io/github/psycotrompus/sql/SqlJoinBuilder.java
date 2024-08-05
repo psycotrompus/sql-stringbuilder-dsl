@@ -5,9 +5,9 @@ import static io.github.psycotrompus.sql.SqlUtils.isBlank;
 /**
  * Represents a JOIN clause when generating SQL query.
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlJoinBuilder implements PartialSql {
+public class SqlJoinBuilder extends PartialSql implements JoinStep {
 
 	private final SqlFromBuilder fromBuilder;
 
@@ -36,14 +36,14 @@ public class SqlJoinBuilder implements PartialSql {
 	 * @param filter a {@link io.github.psycotrompus.sql.SqlTypeFilter} object
 	 * @return a {@link io.github.psycotrompus.sql.SqlFromBuilder} object
 	 */
-	public SqlFromBuilder on(SqlTypeFilter filter) {
+	public FromStep on(SqlTypeFilter filter) {
 		this.filter = filter;
 		return fromBuilder;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String toSql() {
+	String toSql() {
 		if (isBlank(table.getAlias())) {
 			throw new RuntimeException("Table alias is required.");
 		}
