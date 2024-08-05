@@ -3,9 +3,9 @@ package io.github.psycotrompus.sql;
 /**
  * Represents a column as part of the <code>ORDER BY</code> clause.
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlOrder implements PartialSql {
+public class SqlOrder extends PartialSql {
 
 	private final SqlColumn column;
 
@@ -21,7 +21,7 @@ public class SqlOrder implements PartialSql {
 	 *
 	 * @return a {@link java.lang.String} object
 	 */
-	public String toSql() {
+	String toSql() {
 		return String.format("%s %s", column.toSql(), desc ? "DESC" : "ASC");
 	}
 }

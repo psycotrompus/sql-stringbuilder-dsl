@@ -8,9 +8,9 @@ import static java.util.Arrays.asList;
 /**
  * Represents a table definition when generating SQL queries.
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlTable implements PartialSql {
+public class SqlTable extends PartialSql {
 
 	/**
 	 * <p>Creates a builder instance of {@link SqlTable}.</p>
@@ -34,7 +34,7 @@ public class SqlTable implements PartialSql {
 
 		private String alias;
 
-		public Builder(String table) {
+		Builder(String table) {
 			this.table = table;
 		}
 
@@ -83,7 +83,7 @@ public class SqlTable implements PartialSql {
 	 * @return a {@link java.lang.String} object
 	 */
 	@Nullable
-	public String getAlias() {
+	String getAlias() {
 		return alias;
 	}
 
@@ -108,7 +108,7 @@ public class SqlTable implements PartialSql {
 
 	/** {@inheritDoc} */
 	@Override
-	public String toSql() {
+	String toSql() {
 		if (!isBlank(schema) && !isBlank(alias)) {
 			return String.format("%s.%s AS %s", schema, table, alias);
 		}

@@ -7,9 +7,9 @@ package io.github.psycotrompus.sql;
  *   table1.column1 = table2.column2
  * </pre>
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlColumnFilter implements SqlTypeFilter {
+public class SqlColumnFilter extends SqlTypeFilter {
 
 	private final SqlColumn leftOperand;
 
@@ -24,7 +24,7 @@ public class SqlColumnFilter implements SqlTypeFilter {
 	 * @param comparator a {@link java.lang.String} object
 	 * @param rightOperand a {@link io.github.psycotrompus.sql.SqlColumn} object
 	 */
-	public SqlColumnFilter(SqlColumn leftOperand, String comparator, SqlColumn rightOperand) {
+	SqlColumnFilter(SqlColumn leftOperand, String comparator, SqlColumn rightOperand) {
 		this.leftOperand = leftOperand;
 		this.comparator = comparator;
 		this.rightOperand = rightOperand;
@@ -32,7 +32,7 @@ public class SqlColumnFilter implements SqlTypeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public String toSql() {
+	String toSql() {
 		return String.format("%s %s %s", leftOperand.toSql(), comparator, rightOperand.toSql());
 	}
 }

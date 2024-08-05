@@ -8,17 +8,17 @@ import static java.util.Arrays.asList;
 /**
  * The base class for different types of filters in the <code>WHERE</code> clause.
  *
- * @author ejlay
+ * @author ejlayco
  */
-public interface SqlTypeFilter extends PartialSql {
+public abstract class SqlTypeFilter extends PartialSql {
 
 	/**
-	 * <p>and.</p>
+	 * Combines filters with an <code>AND</code> operator.
 	 *
-	 * @param filter a {@link io.github.psycotrompus.sql.SqlTypeFilter} object
-	 * @return a {@link io.github.psycotrompus.sql.SqlGroupedFilter} object
+	 * @param filter The {@link SqlTypeFilter} instance to combine with this filter.
+	 * @return A combined filer in a {@link SqlGroupedFilter} instance.
 	 */
-	default SqlGroupedFilter and(SqlTypeFilter filter) {
+	SqlGroupedFilter and(SqlTypeFilter filter) {
 		if (filter instanceof SqlGroupedFilter groupedFilter) {
 			List<SqlTypeFilter> filters = new ArrayList<>(groupedFilter.getFilters());
 			filters.add(filter);
@@ -28,12 +28,12 @@ public interface SqlTypeFilter extends PartialSql {
 	}
 
 	/**
-	 * <p>or.</p>
+	 * Combines filters with an <code>OR</code> operator.
 	 *
-	 * @param filter a {@link io.github.psycotrompus.sql.SqlTypeFilter} object
-	 * @return a {@link io.github.psycotrompus.sql.SqlTypeFilter} object
+	 * @param filter The {@link SqlTypeFilter} instance to combine with this filter.
+	 * @return A combined filer in a {@link SqlGroupedFilter} instance.
 	 */
-	default SqlTypeFilter or(SqlTypeFilter filter) {
+	SqlTypeFilter or(SqlTypeFilter filter) {
 		if (filter instanceof SqlGroupedFilter groupedFilter) {
 			List<SqlTypeFilter> filters = new ArrayList<>(groupedFilter.getFilters());
 			filters.add(filter);

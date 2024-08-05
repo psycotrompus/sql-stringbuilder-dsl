@@ -7,9 +7,9 @@ import static java.util.stream.Collectors.joining;
 /**
  * Represents the columns as part of the <code>SELECT</code> clause.
  *
- * @author ejlay
+ * @author ejlayco
  */
-public class SqlProjection implements PartialSql {
+public class SqlProjection extends PartialSql {
 
 	private final List<SqlColumn> columns;
 
@@ -24,7 +24,7 @@ public class SqlProjection implements PartialSql {
 
 	/** {@inheritDoc} */
 	@Override
-	public String toSql() {
+	String toSql() {
 		return columns.stream().map(SqlColumn::toSql).collect(joining(", "));
 	}
 }
