@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <servers>
+    <server>
+      <id>central</id>
+      <username>SpfZWVvd</username>
+      <password>dS33CtQrifLB28OYsqs9qIlyImRKsUsL5zgcztdGqsJK</password>
+    </server>
+    <server>
+      <id>gpg.passphrase</id>
+      <passphrase>{XjSCi7BsEXcHbWIG/3SE7ykoRX8HY36UNTOPz3LQP/o=}</passphrase>
+    </server>
+  </servers>
+</settings>
