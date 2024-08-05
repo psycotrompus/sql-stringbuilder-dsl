@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>io.github.psycotrompus</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
   <version>0.0.5</version>
-  <packaging>jar</packaging>
-  <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
-
   <name>SQL String Builder DSL</name>
   <description>A simple DSL for building SQL queries in Java.</description>
-
-  <scm>
-    <connection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</connection>
-    <developerConnection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</developerConnection>
-    <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
-    <tag>0.0.5</tag>
-  </scm>
-
+  <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
   <licenses>
     <license>
       <name>MIT License</name>
       <url>https://opensource.org/licenses/MIT</url>
     </license>
   </licenses>
-
   <developers>
     <developer>
       <name>Psycotrompus</name>
@@ -33,18 +22,34 @@
       <organizationUrl>https://psycotrompus.github.io</organizationUrl>
     </developer>
   </developers>
-
+  <scm>
+    <connection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</connection>
+    <developerConnection>scm:git:https://github.com/psycotrompus/sql-stringbuilder-dsl.git</developerConnection>
+    <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
+  </scm>
   <properties>
-    <maven.compiler.source>22</maven.compiler.source>
     <maven.compiler.target>22</maven.compiler.target>
+    <maven.compiler.source>22</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
       <version>4.8.6</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apiguardian</groupId>
+      <artifactId>apiguardian-api</artifactId>
+      <version>1.1.2</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -52,12 +57,62 @@
       <version>5.10.3</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>1.10.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.opentest4j</groupId>
+      <artifactId>opentest4j</artifactId>
+      <version>1.3.0</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </pluginRepository>
+  </pluginRepositories>
   <build>
+    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+    <scriptSourceDirectory>${project.basedir}/src/main/scripts</scriptSourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+    <outputDirectory>${project.build.directory}/classes</outputDirectory>
+    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/src/test/resources</directory>
+      </testResource>
+    </testResources>
+    <directory>${project.basedir}/target</directory>
+    <finalName>sql-stringbuilder-dsl-0.0.5</finalName>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.8.0</version>
         <executions>
@@ -70,7 +125,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>3.3.1</version>
         <executions>
@@ -93,15 +147,8 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
         <version>3.2.4</version>
-        <configuration>
-          <gpgArguments>
-            <arg>--pinentry-mode</arg>
-            <arg>loopback</arg>
-          </gpgArguments>
-        </configuration>
         <executions>
           <execution>
             <id>sign-artifacts</id>
@@ -111,10 +158,16 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
+        </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
+        <version>3.0.1</version>
         <configuration>
           <arguments>--settings ${project.basedir}/deploy-settings.xml</arguments>
           <tagNameFormat>@{project.version}</tagNameFormat>
@@ -122,11 +175,10 @@
       </plugin>
     </plugins>
   </build>
-
   <reporting>
+    <outputDirectory>${project.build.directory}/site</outputDirectory>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
@@ -135,5 +187,4 @@
       </plugin>
     </plugins>
   </reporting>
-
 </project>
