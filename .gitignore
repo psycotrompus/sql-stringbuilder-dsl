@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 deploy-settings.xml
 releases.properties
+release-pom.xml
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
