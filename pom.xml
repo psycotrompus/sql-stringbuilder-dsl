@@ -4,7 +4,7 @@
 
   <groupId>io.github.psycotrompus</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
-  <version>0.0.5-SNAPSHOT</version>
+  <version>0.0.6-SNAPSHOT</version>
   <packaging>jar</packaging>
   <url>https://github.com/psycotrompus/sql-stringbuilder-dsl</url>
 
@@ -117,7 +117,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>3.1.1</version>
         <configuration>
-          <arguments>--settings ${project.basedir}/deploy-settings.xml</arguments>
+          <arguments>--settings deploy-settings.xml</arguments>
           <tagNameFormat>@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
