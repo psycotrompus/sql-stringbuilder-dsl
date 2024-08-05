@@ -2,7 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-settings.xml
+deploy-settings.xml
 releases.properties
 
 ### IntelliJ IDEA ###
