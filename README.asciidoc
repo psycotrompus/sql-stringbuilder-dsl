@@ -36,15 +36,9 @@ Add the dependency to your project:
 <dependency>
   <groupId>com.lits.sql</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
-  <version>{version}</version>
+  <version>0.0.8</version>
 </dependency>
 ----
-
-.Not Available on Maven Central
-[NOTE]
-=======================
-This project is not available on Maven Central yet. You can check out the source code and do maven install of this project.
-=======================
 
 Create a `SqlTable` objects for each table in your query:
 
