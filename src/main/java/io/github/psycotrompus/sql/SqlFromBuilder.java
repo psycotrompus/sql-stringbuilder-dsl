@@ -56,6 +56,17 @@ public class SqlFromBuilder implements FromStep, FinalStep {
 		return context;
 	}
 
+	@Override
+	public FinalStep limit(int limit) {
+		return limit(limit, null);
+	}
+
+	@Override
+	public FinalStep limit(int limit, Integer offset) {
+		context.addLimit(new SqlLimitBuilder(limit, offset));
+		return context;
+	}
+
 	public String build() {
 		return context.build();
 	}

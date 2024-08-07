@@ -22,6 +22,7 @@ I needed a simple way to build SQL queries in Java, and I didn't want to use add
 * Filters
 ** Produces named parameters for later preparation of statement
 * Ordering (one or more columns)
+* Pagination using standard limit-offset syntax
 
 == How do I use it?
 
@@ -64,6 +65,7 @@ final var sql = SqlBuilder
     .and(tenant.column("active").isFalse().or(tenant.column("active").isNull()))
     .and(profile.column("name").like("prefix"))
     .orderBy(profile.column("name").asc(), tenant.column("date_registered").desc())
+    .limit(10, 5)
     .build();
 ----
 
@@ -79,7 +81,8 @@ WHERE 1=1
   AND (t.id IN :id OR t.name = :name)
   AND (t.active IS false OR t.active IS null)
   AND p.name LIKE :prefix
-ORDER BY p.name ASC, t.date_registered DESC;
+ORDER BY p.name ASC, t.date_registered DESC
+LIMIT 10 OFFSET 5;
 ----
 
 .PREPARE YOUR STATEMENT
