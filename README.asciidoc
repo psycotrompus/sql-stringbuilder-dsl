@@ -37,7 +37,7 @@ Add the dependency to your project:
 <dependency>
   <groupId>com.lits.sql</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
-  <version>0.0.8</version>
+  <version>0.0.9</version>
 </dependency>
 ----
 
