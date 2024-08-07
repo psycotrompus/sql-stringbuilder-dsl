@@ -21,6 +21,17 @@ class SqlWhereBuilder implements WhereStep {
 	}
 
 	@Override
+	public FinalStep limit(int limit) {
+		return limit(limit, null);
+	}
+
+	@Override
+	public FinalStep limit(int limit, Integer offset) {
+		context.addLimit(new SqlLimitBuilder(limit, offset));
+		return context;
+	}
+
+	@Override
 	public FinalStep orderBy(SqlOrder... orders) {
 		for (SqlOrder order : orders) {
 			context.addOrder(order);

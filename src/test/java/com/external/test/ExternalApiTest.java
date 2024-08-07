@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ExternalApiTest {
+class ExternalApiTest {
 
 	@Test
 	void testSimpleSql() {
@@ -31,5 +31,29 @@ public class ExternalApiTest {
 				.orderBy(table1.column("index").asc())
 				.build();
 		assertEquals("SELECT t1.column1, t2.another_column FROM table1 AS t1 LEFT JOIN table2 AS t2 ON t1.id = t2.table1_id WHERE 1=1 AND t1.id = :id ORDER BY t1.index ASC;", sql);
+	}
+
+	@Test
+	void testWithLimitsAtFrom() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.asterisk())
+				.from(table)
+				.limit(10)
+				.build();
+		assertEquals("SELECT * FROM table LIMIT 10;", sql);
+	}
+
+	@Test
+	void testWithLimitsAtJoin() {
+		var table1 = SqlTable.of("table1").as("t1").build();
+		var table2 = SqlTable.of("table2").as("t2").build();
+		var sql = SqlBuilder
+				.select(table1.asterisk())
+				.from(table1)
+				.leftJoin(table2).on(table1.column("id").eq(table2.column("table1_id")))
+				.limit(10, 10)
+				.build();
+		assertEquals("SELECT t1.* FROM table1 AS t1 LEFT JOIN table2 AS t2 ON t1.id = t2.table1_id LIMIT 10 OFFSET 10;", sql);
 	}
 }

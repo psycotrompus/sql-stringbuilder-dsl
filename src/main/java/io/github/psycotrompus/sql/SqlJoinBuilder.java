@@ -41,11 +41,21 @@ public class SqlJoinBuilder extends PartialSql implements JoinStep {
 		return fromBuilder;
 	}
 
+	@Override
+	public FinalStep limit(int limit) {
+		return fromBuilder.limit(limit);
+	}
+
+	@Override
+	public FinalStep limit(int limit, Integer offset) {
+		return fromBuilder.limit(limit, offset);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	String toSql() {
 		if (isBlank(table.getAlias())) {
-			throw new RuntimeException("Table alias is required.");
+			throw new SqlBuilderException("Table alias is required.");
 		}
 		return String.format("%s %s ON %s", joinType, table.toSql(), filter.toSql());
 	}

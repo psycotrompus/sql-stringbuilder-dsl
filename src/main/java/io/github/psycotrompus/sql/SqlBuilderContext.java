@@ -23,6 +23,8 @@ class SqlBuilderContext implements FinalStep {
 	// for ORDER BY clause
 	private final List<SqlOrder> orders = new ArrayList<>();
 
+	private SqlLimitBuilder limit;
+
 	SqlBuilderContext(SqlProjection projection) {
 		this.projection = projection;
 	}
@@ -41,6 +43,10 @@ class SqlBuilderContext implements FinalStep {
 
 	void addOrder(SqlOrder order) {
 		orders.add(order);
+	}
+
+	void addLimit(SqlLimitBuilder limit) {
+		this.limit = limit;
 	}
 
 	@Override
@@ -74,7 +80,10 @@ class SqlBuilderContext implements FinalStep {
 			sql.append(orders.stream().map(SqlOrder::toSql).collect(joining(", ")));
 		}
 
-		// TODO: Implement LIMIT clause
+		// LIMIT clause
+		if (this.limit != null) {
+			sql.append(limit.toSql());
+		}
 
 		return sql.append(";").toString();
 	}

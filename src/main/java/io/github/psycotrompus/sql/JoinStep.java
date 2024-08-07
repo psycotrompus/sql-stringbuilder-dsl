@@ -5,7 +5,7 @@ package io.github.psycotrompus.sql;
  *
  * @author ejlayco
  */
-public interface JoinStep {
+public interface JoinStep extends LimitStep {
 
 	FromStep on(SqlTypeFilter filter);
 }
