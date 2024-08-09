@@ -26,11 +26,7 @@ I needed a simple way to build SQL queries in Java, and I didn't want to use add
 
 == How do I use it?
 
-Make sure you have Java 22 SDK already setup/installed.
-
-Checkout this project source then do maven install of this project.
-
-Add the dependency to your project:
+For maven projects, add the dependency to your project:
 
 [source,xml]
 ----
@@ -39,6 +35,20 @@ Add the dependency to your project:
   <artifactId>sql-stringbuilder-dsl</artifactId>
   <version>0.0.9</version>
 </dependency>
+----
+
+For gradle projects:
+
+[source,groovy]
+----
+implementation 'io.github.psycotrompus:sql-stringbuilder-dsl:0.0.9'
+----
+
+or if you're using Kotlin DSL in Gradle:
+
+[source,kotlin]
+----
+implementation("io.github.psycotrompus:sql-stringbuilder-dsl:0.0.9")
 ----
 
 Create a `SqlTable` objects for each table in your query:
