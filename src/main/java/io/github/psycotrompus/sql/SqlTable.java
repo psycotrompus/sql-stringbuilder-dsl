@@ -1,9 +1,9 @@
 package io.github.psycotrompus.sql;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 import static io.github.psycotrompus.sql.SqlUtils.isBlank;
-import static java.util.Arrays.asList;
 
 /**
  * Represents a table definition when generating SQL queries.
@@ -93,14 +93,14 @@ public class SqlTable extends PartialSql {
 	 * @return a {@link io.github.psycotrompus.sql.SqlProjection} object
 	 */
 	public SqlProjection asterisk() {
-		return new SqlProjection(asList(new SqlColumn(this, "*")));
+		return new SqlProjection(List.of(new SqlColumn(this, "*")));
 	}
 
 	/**
-	 * <p>column.</p>
+	 * Creates an instance of this table's column using this name.
 	 *
-	 * @param name a {@link java.lang.String} object
-	 * @return a {@link io.github.psycotrompus.sql.SqlColumn} object
+	 * @param name The name of this column.
+	 * @return A {@link SqlColumn} object that represents a column of this table.
 	 */
 	public SqlColumn column(String name) {
 		return new SqlColumn(this, name);

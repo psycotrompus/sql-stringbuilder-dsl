@@ -101,6 +101,23 @@ LIMIT 10 OFFSET 5;
 After generating the SQL string, make sure to sanitize it before executing it.
 =======================
 
+== How do I contribute to this project?
+
+You can contribute developing this project by checking this out and make a pull request to merge your changes.
+
+Make sure you have the minimum setup to contribute to this project:
+
+* Java JDK 17
+* Git CLI
+
+Please make sure you follow the standard coding patterns being used throughout this project.
+
+* Make sure to only expose classes that are necessary for the user to be used in their project. Mark your class
+  as **package private**
+* Do the same for the methods by exposing (marking as `public`) methods that are needed at the user level
+* Use the **Step-Builder** pattern if necessary
+* Follow standard Java naming conventions
+
 == License
 
 This project is licensed under the MIT License - see the LICENSE.txt file for details.

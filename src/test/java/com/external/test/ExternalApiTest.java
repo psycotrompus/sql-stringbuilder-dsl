@@ -56,4 +56,70 @@ class ExternalApiTest {
 				.build();
 		assertEquals("SELECT t1.* FROM table1 AS t1 LEFT JOIN table2 AS t2 ON t1.id = t2.table1_id LIMIT 10 OFFSET 10;", sql);
 	}
+
+	@Test
+	void testWithGreaterThanComparator() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("column1"))
+				.from(table)
+				.where(table.column("id").gt("id"))
+				.build();
+		assertEquals("SELECT column1 FROM table WHERE 1=1 AND id > :id;", sql);
+	}
+
+	@Test
+	void testWithLessThanComparator() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("column1"))
+				.from(table)
+				.where(table.column("id").lt("id"))
+				.build();
+		assertEquals("SELECT column1 FROM table WHERE 1=1 AND id < :id;", sql);
+	}
+
+	@Test
+	void testNotEqualsComparator() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("column1"))
+				.from(table)
+				.where(table.column("id").ne("id"))
+				.build();
+		assertEquals("SELECT column1 FROM table WHERE 1=1 AND id <> :id;", sql);
+	}
+
+	@Test
+	void testGreaterThanOrEqualComparator() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("column1"))
+				.from(table)
+				.where(table.column("id").gte("id"))
+				.build();
+		assertEquals("SELECT column1 FROM table WHERE 1=1 AND id >= :id;", sql);
+	}
+
+	@Test
+	void testLessThanOrEqualComparator() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("column1"))
+				.from(table)
+				.where(table.column("id").lte("id"))
+				.build();
+		assertEquals("SELECT column1 FROM table WHERE 1=1 AND id <= :id;", sql);
+	}
+
+	@Test
+	void testIsTrueComparator() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("column1"))
+				.from(table)
+				.where(table.column("enabled").isTrue())
+				.build();
+		assertEquals("SELECT column1 FROM table WHERE 1=1 AND enabled IS true;", sql);
+	}
 }
