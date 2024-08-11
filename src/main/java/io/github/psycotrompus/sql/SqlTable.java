@@ -97,10 +97,10 @@ public class SqlTable extends PartialSql {
 	}
 
 	/**
-	 * <p>column.</p>
+	 * Creates an instance of this table's column using this name.
 	 *
-	 * @param name a {@link java.lang.String} object
-	 * @return a {@link io.github.psycotrompus.sql.SqlColumn} object
+	 * @param name The name of this column.
+	 * @return A {@link SqlColumn} object that represents a column of this table.
 	 */
 	public SqlColumn column(String name) {
 		return new SqlColumn(this, name);
