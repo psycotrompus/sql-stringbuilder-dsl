@@ -2,7 +2,6 @@ package com.external.test;
 
 import io.github.psycotrompus.sql.SqlBuilder;
 import io.github.psycotrompus.sql.SqlTable;
-import io.github.psycotrompus.sql.SqlTypeFilter;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -111,5 +110,16 @@ class ExternalApiTest {
 				.where(table.column("id").lte("id"))
 				.build();
 		assertEquals("SELECT column1 FROM table WHERE 1=1 AND id <= :id;", sql);
+	}
+
+	@Test
+	void testIsTrueComparator() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("column1"))
+				.from(table)
+				.where(table.column("enabled").isTrue())
+				.build();
+		assertEquals("SELECT column1 FROM table WHERE 1=1 AND enabled IS true;", sql);
 	}
 }
