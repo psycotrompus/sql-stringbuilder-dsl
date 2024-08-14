@@ -26,5 +26,6 @@ public final class Aggregators {
     return new SqlAggregate(column, "AVG");
   }
 
-  private Aggregators() {}
+  private Aggregators() {
+  }
 }

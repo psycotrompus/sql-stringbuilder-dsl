@@ -20,7 +20,6 @@ public class SqlAggregate implements Projection {
 
   /**
    * Creates a new instance of this aggregate of the same function with a new alias.
-   *
    * @param alias The new alias of type {@link String} for this aggregate.
    * @return A new instance of {@link SqlAggregate} with the new alias.
    */

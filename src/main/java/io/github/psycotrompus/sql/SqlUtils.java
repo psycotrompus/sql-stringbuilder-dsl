@@ -5,15 +5,15 @@ package io.github.psycotrompus.sql;
  */
 final class SqlUtils {
 
-	/**
-	 * <p>isBlank.</p>
-	 *
-	 * @param str a {@link java.lang.String} object
-	 * @return a boolean
-	 */
-	public static boolean isBlank(String str) {
-		return str == null || str.trim().isEmpty();
-	}
+  /**
+   * <p>isBlank.</p>
+   * @param str a {@link java.lang.String} object
+   * @return a boolean
+   */
+  public static boolean isBlank(String str) {
+    return str == null || str.trim().isEmpty();
+  }
 
-	private SqlUtils() {}
+  private SqlUtils() {
+  }
 }
