@@ -13,7 +13,9 @@ I needed a simple way to build SQL queries in Java, and I didn't want to use add
 
 == Features
 
-* Column projections with aliases
+* Column projections
+** Aliases
+** Aggregate functions
 * Table aliases
 ** Inter-schema joins support
 * Table joins
@@ -21,6 +23,7 @@ I needed a simple way to build SQL queries in Java, and I didn't want to use add
 ** Left joins
 * Filters
 ** Produces named parameters for later preparation of statement
+* Aggregation
 * Ordering (one or more columns)
 * Pagination using standard limit-offset syntax
 
@@ -65,7 +68,7 @@ Then, create a `SqlBuilder` object and use it to build your query:
 [source,java]
 ----
 final var sql = SqlBuilder
-    .select(tenant.asterisk())
+    .select(user.column("tenant_id"), count(tenant.asterisk()))
     .from(tenant)
     .leftJoin(profile).on(tenant.column("id").eq(profile.column("tenant_id")))
     .innerJoin(user).on(profile.column("id").eq(user.column("profile_id")))
@@ -74,6 +77,7 @@ final var sql = SqlBuilder
     )
     .and(tenant.column("active").isFalse().or(tenant.column("active").isNull()))
     .and(profile.column("name").like("prefix"))
+    .groupBy(user.column("tenant_id")).having(user.column("active").isTrue())
     .orderBy(profile.column("name").asc(), tenant.column("date_registered").desc())
     .limit(10, 5)
     .build();
@@ -83,7 +87,7 @@ The output of the above code will be:
 
 [source,sql]
 ----
-SELECT t.*
+SELECT u.tenant_id, COUNT(t.*)
 FROM schema1.tenant AS t
   LEFT JOIN schema2.profile AS p ON t.id = p.tenant_id
   INNER JOIN schema3.user AS u ON p.id = u.profile_id
@@ -91,6 +95,7 @@ WHERE 1=1
   AND (t.id IN :id OR t.name = :name)
   AND (t.active IS false OR t.active IS null)
   AND p.name LIKE :prefix
+GROUP BY u.tenant_id HAVING u.active IS true
 ORDER BY p.name ASC, t.date_registered DESC
 LIMIT 10 OFFSET 5;
 ----

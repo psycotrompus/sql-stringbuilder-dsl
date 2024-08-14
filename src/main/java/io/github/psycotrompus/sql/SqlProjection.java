@@ -6,25 +6,25 @@ import static java.util.stream.Collectors.joining;
 
 /**
  * Represents the columns as part of the <code>SELECT</code> clause.
- *
  * @author ejlayco
  */
 public class SqlProjection extends PartialSql {
 
-	private final List<SqlColumn> columns;
+  private final List<Projection> projections;
 
-	/**
-	 * <p>Constructor for SqlProjection.</p>
-	 *
-	 * @param columns a {@link java.util.List} object
-	 */
-	public SqlProjection(List<SqlColumn> columns) {
-		this.columns = columns;
-	}
+  /**
+   * <p>Constructor for SqlProjection.</p>
+   * @param projections a {@link java.util.List} object
+   */
+  SqlProjection(List<Projection> projections) {
+    this.projections = projections;
+  }
 
-	/** {@inheritDoc} */
-	@Override
-	String toSql() {
-		return columns.stream().map(SqlColumn::toSql).collect(joining(", "));
-	}
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  String toSql() {
+    return projections.stream().map(Projection::project).collect(joining(", "));
+  }
 }

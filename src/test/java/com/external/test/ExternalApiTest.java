@@ -4,6 +4,7 @@ import io.github.psycotrompus.sql.SqlBuilder;
 import io.github.psycotrompus.sql.SqlTable;
 import org.junit.jupiter.api.Test;
 
+import static io.github.psycotrompus.sql.Aggregators.count;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExternalApiTest {
@@ -121,5 +122,16 @@ class ExternalApiTest {
 				.where(table.column("enabled").isTrue())
 				.build();
 		assertEquals("SELECT column1 FROM table WHERE 1=1 AND enabled IS true;", sql);
+	}
+
+	@Test
+	void testGroupBy() {
+		var table = SqlTable.of("table").build();
+		var sql = SqlBuilder
+				.select(table.column("country"), count(table.asterisk()))
+				.from(table)
+				.groupBy(table.column("country"))
+				.build();
+		assertEquals("SELECT country, COUNT(*) FROM table GROUP BY country;", sql);
 	}
 }
