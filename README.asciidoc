@@ -33,7 +33,7 @@ For maven projects, add the dependency to your project:
 <dependency>
   <groupId>com.lits.sql</groupId>
   <artifactId>sql-stringbuilder-dsl</artifactId>
-  <version>0.0.11</version>
+  <version>0.0.12</version>
 </dependency>
 ----
 
@@ -41,14 +41,14 @@ For gradle projects:
 
 [source,groovy]
 ----
-implementation 'io.github.psycotrompus:sql-stringbuilder-dsl:0.0.11'
+implementation 'io.github.psycotrompus:sql-stringbuilder-dsl:0.0.12'
 ----
 
 or if you're using Kotlin DSL in Gradle:
 
 [source,kotlin]
 ----
-implementation("io.github.psycotrompus:sql-stringbuilder-dsl:0.0.11")
+implementation("io.github.psycotrompus:sql-stringbuilder-dsl:0.0.12")
 ----
 
 Create a `SqlTable` objects for each table in your query:
