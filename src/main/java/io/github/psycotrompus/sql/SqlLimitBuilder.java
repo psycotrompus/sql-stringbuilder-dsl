@@ -4,11 +4,7 @@ class SqlLimitBuilder extends PartialSql {
 
   private final Integer limit;
 
-  private Integer offset;
-
-  SqlLimitBuilder(Integer limit) {
-    this(limit, null);
-  }
+  private final Integer offset;
 
   SqlLimitBuilder(Integer limit, Integer offset) {
     this.limit = limit;

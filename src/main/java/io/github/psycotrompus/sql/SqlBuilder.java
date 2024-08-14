@@ -9,9 +9,9 @@ import static java.util.Arrays.asList;
 public class SqlBuilder implements SelectStep {
 
   /**
-   * Creates a new {@link io.github.psycotrompus.sql.SqlBuilder} instance for building a SELECT query.
-   * @param columns the columns to select
-   * @return a new {@link io.github.psycotrompus.sql.SqlBuilder} instance
+   * Creates a new {@link SqlBuilder} instance for building a SELECT query.
+   * @param projections A variable arguments of type {@link Projection}.
+   * @return a new {@link SqlBuilder} instance
    */
   public static SelectStep select(Projection... projections) {
     var projection = new SqlProjection(asList(projections));
