@@ -2,17 +2,17 @@ package io.github.psycotrompus.sql;
 
 public interface FilterStep {
 
-	LogicStep eq(SqlColumn column);
+  LogicStep eq(SqlColumn column);
 
-	LogicStep eq(String parameter);
+  LogicStep eq(String parameter);
 
-	LogicStep in(String parameter);
+  LogicStep in(String parameter);
 
-	LogicStep isTrue();
+  LogicStep isTrue();
 
-	LogicStep isFalse();
+  LogicStep isFalse();
 
-	LogicStep isNull();
+  LogicStep isNull();
 
-	LogicStep like(String parameter);
+  LogicStep like(String parameter);
 }

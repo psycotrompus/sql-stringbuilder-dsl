@@ -10,10 +10,9 @@ package io.github.psycotrompus.sql;
  */
 public interface FinalStep {
 
-	/**
-	 * Builds the full SQL statement with a semicolon (<code>;</code>) terminator at the end.
-	 *
-	 * @return The final SQL {@link String} statement built.
-	 */
-	String build();
+  /**
+   * Builds the full SQL statement with a semicolon (<code>;</code>) terminator at the end.
+   * @return The final SQL {@link String} statement built.
+   */
+  String build();
 }

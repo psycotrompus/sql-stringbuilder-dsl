@@ -1,6 +1,7 @@
 package io.github.psycotrompus.sql;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,83 +9,96 @@ import static java.util.stream.Collectors.joining;
 
 class SqlBuilderContext implements FinalStep {
 
-	// for SELECT clause
-	private final SqlProjection projection;
+  // for SELECT clause
+  private final SqlProjection projection;
 
-	// for FROM clause
-	private SqlTable rootTable;
+  // for FROM clause
+  private SqlTable rootTable;
 
-	// for JOIN clause
-	private final List<SqlJoinBuilder> joins = new ArrayList<>();
+  // for JOIN clause
+  private final List<SqlJoinBuilder> joins = new ArrayList<>();
 
-	// for WHERE clause
-	private final List<SqlTypeFilter> filters = new ArrayList<>();
+  // for WHERE clause
+  private final List<SqlTypeFilter> filters = new ArrayList<>();
 
-	// for ORDER BY clause
-	private final List<SqlOrder> orders = new ArrayList<>();
+  // for GROUP BY ... HAVING clause
+  private SqlAggregateBuilder aggregate;
 
-	private SqlLimitBuilder limit;
+  // for ORDER BY clause
+  private final List<SqlOrder> orders = new ArrayList<>();
 
-	SqlBuilderContext(SqlProjection projection) {
-		this.projection = projection;
-	}
+  // for LIMIT clause
+  private SqlLimitBuilder limit;
 
-	void setRootTable(SqlTable rootTable) {
-		this.rootTable = rootTable;
-	}
+  SqlBuilderContext(SqlProjection projection) {
+    this.projection = projection;
+  }
 
-	void addJoin(SqlJoinBuilder join) {
-		joins.add(join);
-	}
+  void setRootTable(SqlTable rootTable) {
+    this.rootTable = rootTable;
+  }
 
-	void addFilter(SqlTypeFilter filter) {
-		filters.add(filter);
-	}
+  void addJoin(SqlJoinBuilder join) {
+    joins.add(join);
+  }
 
-	void addOrder(SqlOrder order) {
-		orders.add(order);
-	}
+  void addFilter(SqlTypeFilter filter) {
+    filters.add(filter);
+  }
 
-	void addLimit(SqlLimitBuilder limit) {
-		this.limit = limit;
-	}
+  void setAggregate(SqlAggregateBuilder aggregate) {
+    this.aggregate = aggregate;
+  }
 
-	@Override
-	public String build() {
-		if (projection == null) {
-			throw new SqlBuilderException("No projections specified");
-		}
-		if (this.rootTable == null) {
-			throw new SqlBuilderException("No tables to select from.");
-		}
-		// SELECT clause
-		StringBuilder sql = new StringBuilder("SELECT ");
-		sql.append(projection.toSql());
+  void addOrders(SqlOrder... orders) {
+    this.orders.addAll(Arrays.asList(orders));
+  }
 
-		// FROM (and JOIN) clause
-		sql.append(" FROM ").append(rootTable.toSql());
-		if (!joins.isEmpty()) {
-			sql.append(" ");
-			sql.append(joins.stream().map(SqlJoinBuilder::toSql).collect(Collectors.joining(" ")));
-		}
+  void addLimit(SqlLimitBuilder limit) {
+    this.limit = limit;
+  }
 
-		// WHERE clause
-		if (!this.filters.isEmpty()) {
-			sql.append(" WHERE 1=1 AND ");
-			sql.append(filters.stream().map(SqlTypeFilter::toSql).collect(joining(" AND ")));
-		}
+  @Override
+  public String build() {
+    if (projection == null) {
+      throw new SqlBuilderException("No projections specified");
+    }
+    if (this.rootTable == null) {
+      throw new SqlBuilderException("No tables to select from.");
+    }
+    // SELECT clause
+    StringBuilder sql = new StringBuilder("SELECT ");
+    sql.append(projection.toSql());
 
-		// ORDER clause
-		if (!orders.isEmpty()) {
-			sql.append(" ORDER BY ");
-			sql.append(orders.stream().map(SqlOrder::toSql).collect(joining(", ")));
-		}
+    // FROM (and JOIN) clause
+    sql.append(" FROM ").append(rootTable.toSql());
+    if (!joins.isEmpty()) {
+      sql.append(" ")
+          .append(joins.stream().map(SqlJoinBuilder::toSql).collect(Collectors.joining(" ")));
+    }
 
-		// LIMIT clause
-		if (this.limit != null) {
-			sql.append(limit.toSql());
-		}
+    // WHERE clause
+    if (!this.filters.isEmpty()) {
+      sql.append(" WHERE 1=1 AND ");
+      sql.append(filters.stream().map(SqlTypeFilter::toSql).collect(joining(" AND ")));
+    }
 
-		return sql.append(";").toString();
-	}
+    // GROUP BY ... HAVING
+    if (this.aggregate != null) {
+      sql.append(" ").append(aggregate.toSql());
+    }
+
+    // ORDER clause
+    if (!orders.isEmpty()) {
+      sql.append(" ORDER BY ")
+          .append(orders.stream().map(SqlOrder::toSql).collect(joining(", ")));
+    }
+
+    // LIMIT clause
+    if (this.limit != null) {
+      sql.append(limit.toSql());
+    }
+
+    return sql.append(";").toString();
+  }
 }
