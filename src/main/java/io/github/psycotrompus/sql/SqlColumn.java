@@ -8,13 +8,13 @@ import static io.github.psycotrompus.sql.SqlUtils.isBlank;
  *
  * @author ejlayco
  */
-public class SqlColumn extends PartialSql {
+public class SqlColumn extends PartialSql implements Projection {
 
 	private final SqlTable table;
 
 	private final String name;
 
-	private final String alias;
+	private String alias;
 
 	/**
 	 * <p>Constructor for SqlColumn.</p>
@@ -37,6 +37,18 @@ public class SqlColumn extends PartialSql {
 		this.table = table;
 		this.name = name;
 		this.alias = alias;
+	}
+
+	/**
+	 * Updates this column definition with alias.
+	 *
+	 * @param alias The new alias of type {@link String} for this column.
+	 * @return AAn updated {@link SqlColumn} with the new alias.
+	 */
+	@Override
+	public SqlColumn as(String alias) {
+		this.alias = alias;
+		return this;
 	}
 
 	/**
@@ -186,9 +198,20 @@ public class SqlColumn extends PartialSql {
 		return new SqlOrder(this, true);
 	}
 
-	/** {@inheritDoc} */
+	SqlTable getTable() {
+		return this.table;
+	}
+
+	protected String getName() {
+		return this.name;
+	}
+
+	protected String getAlias() {
+		return this.alias;
+	}
+
 	@Override
-	String toSql() {
+	public String project() {
 		if (!isBlank(table.getAlias()) && !isBlank(alias)) {
 			return String.format("%s.%s AS %s", table.getAlias(), name, alias);
 		}
@@ -197,6 +220,18 @@ public class SqlColumn extends PartialSql {
 		}
 		if (!isBlank(table.getAlias()) && isBlank(alias)) {
 			return String.format("%s.%s", table.getAlias(), name);
+		}
+		return name;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	String toSql() {
+		if (!isBlank(alias)) {
+			return alias;
+		}
+		if (!isBlank(table.getAlias())) {
+			return table.getAlias() + "." + name;
 		}
 		return name;
 	}

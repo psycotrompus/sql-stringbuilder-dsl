@@ -11,20 +11,20 @@ import static java.util.stream.Collectors.joining;
  */
 public class SqlProjection extends PartialSql {
 
-	private final List<SqlColumn> columns;
+	private final List<Projection> projections;
 
 	/**
 	 * <p>Constructor for SqlProjection.</p>
 	 *
-	 * @param columns a {@link java.util.List} object
+	 * @param projections a {@link java.util.List} object
 	 */
-	public SqlProjection(List<SqlColumn> columns) {
-		this.columns = columns;
+	SqlProjection(List<Projection> projections) {
+		this.projections = projections;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	String toSql() {
-		return columns.stream().map(SqlColumn::toSql).collect(joining(", "));
+		return projections.stream().map(Projection::project).collect(joining(", "));
 	}
 }

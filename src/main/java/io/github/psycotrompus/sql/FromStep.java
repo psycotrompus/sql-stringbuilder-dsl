@@ -5,7 +5,7 @@ package io.github.psycotrompus.sql;
  *
  * @author ejlayco
  */
-public interface FromStep extends SortingStep, LimitStep, FinalStep {
+public interface FromStep extends AggregateStep, SortingStep, LimitStep, FinalStep {
 
 	/**
 	 * Starts a <code>LEFT JOIN</code> builder step.

@@ -1,5 +1,7 @@
 package io.github.psycotrompus.sql;
 
+import static io.github.psycotrompus.sql.SqlUtils.isBlank;
+
 /**
  * References a parameterized value filter in a SQL statement.
  * The format is:
@@ -14,6 +16,10 @@ package io.github.psycotrompus.sql;
  * OR
  * <pre>
  *   table.column_name IS true
+ * </pre>
+ * OR
+ * <pre>
+ *   column_alias IN :parameter
  * </pre>
  *
  * @author ejlayco
@@ -35,6 +41,17 @@ public class SqlValueFilter extends SqlTypeFilter {
 	/** {@inheritDoc} */
 	@Override
 	String toSql() {
-		return String.format("%s %s %s", column.toSql(), comparator, parameter);
+		StringBuilder sb = new StringBuilder();
+		if (!isBlank(column.getAlias())) {
+			sb.append(column.getAlias());
+		}
+		else if (!isBlank(column.getTable().getAlias())) {
+			sb.append(column.getTable().getAlias()).append(".").append(column.getName());
+		}
+		else {
+			sb.append(column.getName());
+		}
+		sb.append(" ").append(comparator).append(" ").append(parameter);
+		return sb.toString();
 	}
 }

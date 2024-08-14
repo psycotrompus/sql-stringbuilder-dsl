@@ -21,6 +21,11 @@ class SqlWhereBuilder implements WhereStep {
 	}
 
 	@Override
+	public SqlAggregateBuilder groupBy(SqlColumn column) {
+		return new SqlAggregateBuilder(context, column);
+	}
+
+	@Override
 	public FinalStep limit(int limit) {
 		return limit(limit, null);
 	}
@@ -33,9 +38,7 @@ class SqlWhereBuilder implements WhereStep {
 
 	@Override
 	public FinalStep orderBy(SqlOrder... orders) {
-		for (SqlOrder order : orders) {
-			context.addOrder(order);
-		}
+		context.addOrders(orders);
 		return context;
 	}
 

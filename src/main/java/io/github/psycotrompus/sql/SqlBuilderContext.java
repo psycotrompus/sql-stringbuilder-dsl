@@ -1,6 +1,7 @@
 package io.github.psycotrompus.sql;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +21,13 @@ class SqlBuilderContext implements FinalStep {
 	// for WHERE clause
 	private final List<SqlTypeFilter> filters = new ArrayList<>();
 
+	// for GROUP BY ... HAVING clause
+	private SqlAggregateBuilder aggregate;
+
 	// for ORDER BY clause
 	private final List<SqlOrder> orders = new ArrayList<>();
 
+	// for LIMIT clause
 	private SqlLimitBuilder limit;
 
 	SqlBuilderContext(SqlProjection projection) {
@@ -41,8 +46,12 @@ class SqlBuilderContext implements FinalStep {
 		filters.add(filter);
 	}
 
-	void addOrder(SqlOrder order) {
-		orders.add(order);
+	void setAggregate(SqlAggregateBuilder aggregate) {
+		this.aggregate = aggregate;
+	}
+
+	void addOrders(SqlOrder... orders) {
+    this.orders.addAll(Arrays.asList(orders));
 	}
 
 	void addLimit(SqlLimitBuilder limit) {
@@ -64,8 +73,8 @@ class SqlBuilderContext implements FinalStep {
 		// FROM (and JOIN) clause
 		sql.append(" FROM ").append(rootTable.toSql());
 		if (!joins.isEmpty()) {
-			sql.append(" ");
-			sql.append(joins.stream().map(SqlJoinBuilder::toSql).collect(Collectors.joining(" ")));
+			sql.append(" ")
+					.append(joins.stream().map(SqlJoinBuilder::toSql).collect(Collectors.joining(" ")));
 		}
 
 		// WHERE clause
@@ -74,10 +83,15 @@ class SqlBuilderContext implements FinalStep {
 			sql.append(filters.stream().map(SqlTypeFilter::toSql).collect(joining(" AND ")));
 		}
 
+		// GROUP BY ... HAVING
+		if (this.aggregate != null) {
+			sql.append(" ").append(aggregate.toSql());
+		}
+
 		// ORDER clause
 		if (!orders.isEmpty()) {
-			sql.append(" ORDER BY ");
-			sql.append(orders.stream().map(SqlOrder::toSql).collect(joining(", ")));
+			sql.append(" ORDER BY ")
+					.append(orders.stream().map(SqlOrder::toSql).collect(joining(", ")));
 		}
 
 		// LIMIT clause

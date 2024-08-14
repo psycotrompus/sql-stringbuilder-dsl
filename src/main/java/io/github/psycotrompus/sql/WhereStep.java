@@ -5,7 +5,7 @@ package io.github.psycotrompus.sql;
  *
  * @author ejlayco
  */
-public interface WhereStep extends SortingStep, LimitStep, FinalStep {
+public interface WhereStep extends AggregateStep, SortingStep, LimitStep, FinalStep {
 
 	/**
 	 * Adds a {@link SqlTypeFilter} instance to add as a filter to this statement using

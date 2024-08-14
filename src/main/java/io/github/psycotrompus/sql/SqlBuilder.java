@@ -3,7 +3,7 @@ package io.github.psycotrompus.sql;
 import static java.util.Arrays.asList;
 
 /**
- * Main class for building SQL queries. The pattern implementation is based on the Step Builder pattern.
+ * Starting class for building SQL queries. The pattern implementation is based on the Step Builder pattern.
  *
  * @author ejlayco
  */
@@ -15,17 +15,8 @@ public class SqlBuilder implements SelectStep {
 	 * @param columns the columns to select
 	 * @return a new {@link io.github.psycotrompus.sql.SqlBuilder} instance
 	 */
-	public static SelectStep select(SqlColumn... columns) {
-		return select(new SqlProjection(asList(columns)));
-	}
-
-	/**
-	 * <p>select.</p>
-	 *
-	 * @param projection a {@link io.github.psycotrompus.sql.SqlProjection} object
-	 * @return a {@link io.github.psycotrompus.sql.SqlBuilder} object
-	 */
-	public static SelectStep select(SqlProjection projection) {
+	public static SelectStep select(Projection... projections) {
+		var projection = new SqlProjection(asList(projections));
 		var context = new SqlBuilderContext(projection);
 		return new SqlBuilder(context);
 	}

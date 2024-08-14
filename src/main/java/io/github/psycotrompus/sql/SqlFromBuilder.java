@@ -49,10 +49,13 @@ public class SqlFromBuilder implements FromStep, FinalStep {
 	}
 
 	@Override
+	public SqlAggregateBuilder groupBy(SqlColumn column) {
+		return new SqlAggregateBuilder(context, column);
+	}
+
+	@Override
 	public FinalStep orderBy(SqlOrder... orders) {
-		for (SqlOrder order : orders) {
-			context.addOrder(order);
-		}
+		context.addOrders(orders);
 		return context;
 	}
 
